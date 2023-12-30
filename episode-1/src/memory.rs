@@ -24,7 +24,7 @@ impl Memory {
     }
 
     pub fn write_word(&mut self, address: usize, word: u16) {
-        self.write_byte(address, ((word & 0xff) as u8).try_into().unwrap());
-        self.write_byte(address + 1, (word >> 8 as u8).try_into().unwrap());
+        self.write_byte(address, (word & 0xff).try_into().unwrap());
+        self.write_byte(address + 1, (word >> 8).try_into().unwrap());
     }
 }

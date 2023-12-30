@@ -15,8 +15,8 @@ impl From<u8> for Instruction {
     }
 }
 
-impl Into<u8> for Instruction {
-    fn into(self) -> u8 {
-        self as u8
+impl From<Instruction> for u8 {
+    fn from(orig: Instruction) -> u8 {
+        orig as u8
     }
 }

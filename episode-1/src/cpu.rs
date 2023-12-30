@@ -55,7 +55,7 @@ impl Cpu {
 
         self.set_register("ip", (instruction_address + 1).try_into().unwrap());
 
-        return instruction;
+        instruction
     }
 
     fn fetch_word(&mut self) -> u16 {
@@ -64,7 +64,7 @@ impl Cpu {
 
         self.set_register("ip", (instruction_address + 2).try_into().unwrap());
 
-        return instruction;
+        instruction
     }
 
     fn execute(&mut self, instruction: Instruction) {
