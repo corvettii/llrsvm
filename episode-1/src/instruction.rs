@@ -10,7 +10,7 @@ impl From<u8> for Instruction {
             0x10 => Self::MovLitR1,
             0x11 => Self::MovLitR2,
             0x12 => Self::AddRegReg,
-            _ => panic!()
+            _ => panic!(),
         }
     }
 }

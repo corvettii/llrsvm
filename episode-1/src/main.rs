@@ -26,7 +26,7 @@ fn main() {
     memory.write_byte(address, Cpu::get_register_offset("r1"));
     address += 1;
     memory.write_byte(address, Cpu::get_register_offset("r2"));
-    
+
     let mut cpu = Cpu::new(memory);
     cpu.debug();
 
