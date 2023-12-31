@@ -1,5 +1,6 @@
 use lazy_static::lazy_static;
 use std::collections::HashMap;
+use std::fmt::{Debug, Formatter, Result};
 
 use crate::instruction::Instruction;
 use crate::memory::Memory;
@@ -16,7 +17,6 @@ lazy_static! {
         .collect();
 }
 
-#[derive(Debug)]
 pub struct Cpu {
     memory: Memory,
     registers: Memory,
@@ -28,13 +28,6 @@ impl Cpu {
             memory,
             registers: Memory::new(REGISTER_NAMES.len() * 2),
         }
-    }
-
-    pub fn debug(&self) {
-        REGISTER_NAMES
-            .iter()
-            .for_each(|name| println!("{: >3}: 0x{:04x}", name, self.get_register(name)));
-        println!();
     }
 
     fn get_register(&self, name: &str) -> u16 {
@@ -90,5 +83,21 @@ impl Cpu {
     pub fn step(&mut self) {
         let instruction: Instruction = self.fetch_byte().into();
         self.execute(instruction);
+    }
+}
+
+impl Debug for Cpu {
+    fn fmt(&self, formatter: &mut Formatter) -> Result {
+        let mut string = "".to_string();
+
+        REGISTER_NAMES.iter().for_each(|name| {
+            string.push_str(&format!(
+                "{: >3}: 0x{:04x}\n",
+                name,
+                self.get_register(name)
+            ))
+        });
+
+        write!(formatter, "\n{}", string)
     }
 }
